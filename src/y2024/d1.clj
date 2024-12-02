@@ -53,8 +53,8 @@
 
 
 (deftest sample-test-pt-2
-  (t/is (= '(2 1 0 1 2 5) (solve-part-1 (generator sample-data) ) )))
+  (t/is (= 31 (solve-part-1 (generator sample-data) ) )))
 
 (deftest sample-test-pt-2
-  (t/is (= '(9 4 0 0 9 9) (solve-part-2 (generator sample-data))  )))
+  (t/is (= 31 (solve-part-2 (generator sample-data))  )))
 
