@@ -35,19 +35,20 @@
 (defn strictly-dec? [xs] 
   (every? neg? xs))
 
-
-
 (defn solve-part-2
   "The solution to part 2. Will be called with the result of the generator"
   [input]
   (let [[safe, maybesafe ]  (->> input (map diffs)
                                        ((juxt filter remove) issafe?))
          maybemaybesafe (->> maybesafe 
-                             (filter #(every? (fn [e] (and (>= e -3) (<= e 3) )) % ))) ]  
-        (if (count (filter pos?)) ) 
-         
+                             (filter #(every? (fn [e] (and (>= e -3) (<= e 3) )) % ))) ]
+        
+      (+ (count safe ) (count (map (fn [xs]  (or (= 1 (count (filter pos? xs)))
+                                                 (= 1 (count (filter zero? xs)))
+                                                 (= 1 (count (filter neg? xs))))) maybemaybesafe)))
      ))
 
+ 
 ;; Tests
 ;; Use tests to verify your solution. Consider using the sample data provided in the question
 
@@ -65,4 +66,4 @@
 
 
 (deftest sample-test-2
-  (t/is (= 2 (solve-part-2 (generator sample-data)))))
+  (t/is (= 4 (solve-part-2 (generator sample-data)))))
