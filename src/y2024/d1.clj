@@ -2,7 +2,6 @@
   (:require [clojure.test :as t :refer [deftest]]
             [clojure.string :as string]))
 
-;; PROBLEM LINK https://adventofcode.com/2024/day/1
 
 ;; Generator Logic
 
@@ -42,8 +41,7 @@
 ;; Use tests to verify your solution. Consider using the sample data provided in the question
 
 (def sample-data 
-"
-3   4
+"3   4
 4   3
 2   5
 1   3
@@ -53,7 +51,7 @@
 
 
 (deftest sample-test-pt-2
-  (t/is (= 31 (solve-part-1 (generator sample-data) ) )))
+  (t/is (= 11 (solve-part-1 (generator sample-data) ) )))
 
 (deftest sample-test-pt-2
   (t/is (= 31 (solve-part-2 (generator sample-data))  )))

@@ -1,6 +1,8 @@
 {:paths ["src" "script"]
- :deps {aysylu/loom {:mvn/version "1.0.2"}
+ :deps {aysylu/loom {:git/url "https://github.com/cjsauer/loom.git"
+                     :sha     "acd15ed3136a0f4091e97bfc187764ff8b60da4e"}
         org.clojure/math.numeric-tower {:mvn/version "0.0.5"}
+        org.clojure/math.combinatorics {:mvn/version  "0.1.6"} 
         org.clojure/data.priority-map {:mvn/version "1.2.0"}
         org.clojure/core.memoize {:mvn/version "1.1.266"}
         org.flatland/ordered {:mvn/version "1.15.12"}
