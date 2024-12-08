@@ -35,10 +35,6 @@
 (defn slope [v1 v2]
   (map - v2 v1))
 
-(let [p1 [3 4] 
-      p2 [5 5]
-      riserun (slope p1 p2) ]
-  [(map - p1 riserun ) (map + p2 riserun )] )
 
 (defn solve-part-1
   "The solution to part 1. Will be called with the result of the generator"
