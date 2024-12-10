@@ -9,7 +9,7 @@
   [input]
   (vec (->> (partition 2 2 nil (map parse-long (re-seq #"\d" input))) 
        (map-indexed vector)
-       (map (fn [[idx filedata]]
+       #_(map (fn [[idx filedata]]
               { :id idx 
                 :used (repeat (first filedata) idx) 
                 :free (repeat (or (second filedata ) 0) -1)   }))))  
@@ -56,8 +56,20 @@
           :else (recur back rst2 (conj result hd))
           ))))
 #_(contiguous (solve-part-1 (generator "12345")))  
-
-
+interleave
+(defn interleave-when [pred col1 col2]
+  (loop [col1 col1
+        col2 col2
+        result []] 
+      (if (empty? col2)
+          result
+          (cond 
+            (pred (first col1)) (recur (rest col1) (rest col2) (conj result (first col2)))   
+            :else               (recur (rest col1) (rest col2 ) result)))
+    ))
+(def fileformat (vec "00...111...2...333.44.5555.6666.777.888899"))
+fileformat
+(println (interleave-when #(and (= \. %)) fileformat (reverse fileformat))) 
 
 (defn solve-part-2
   "The solution to part 2. Will be called with the result of the generator"
