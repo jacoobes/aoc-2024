@@ -50,7 +50,7 @@
         (let [curpath (first queue)
               cands  (candidates visited curpath grid) #_ (println queue (get-in grid curpath)) ]  
           (cond 
-            (= 9 (get-in grid curpath)) (recur (conj visited, curpath) [startp] (inc count9))
+            (= 9 (get-in grid curpath)) (recur #{(last queue)} [startp] (inc count9))
             (empty? cands) (recur (conj visited, curpath) [] (inc count9) )  
             :else (recur (conj visited, curpath) (into (rest queue), cands) count9) )))))
 
@@ -70,8 +70,7 @@
                       [j el] (map-indexed vector row)
                       :when (zero? el) ] 
                   [i j])] 
-    (apply +  (map (partial find-uniques input) zeros)))
-  )
+    (apply +  (map (partial find-uniques input) zeros))))
 
 ;; Tests
 ;; Use tests to verify your solution. Consider using the sample data provided in the question
@@ -80,5 +79,5 @@
   (t/is (= 36 (solve-part-1 (generator sample-data-1)) )))
 
 (deftest sample-test
-  (t/is (= 81 (solve-part-1 (generator sample-data-1)) )))
+  (t/is (= 81 (solve-part-2 (generator sample-data-1)) )))
 
