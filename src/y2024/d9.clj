@@ -86,3 +86,9 @@ fileformat
 
 (deftest sample-test-1
   (t/is (= 1928 (solve-part-1 (generator "12345")))))
+
+(deftest sample-test-2
+  (t/is (= 134 (solve-part-1 (generator "101010111010111")))))
+
+(deftest sampletest3
+  (t/is (= 0123456 (solve-part-1 (generator "1010101110101113")))))
