@@ -37,17 +37,40 @@
 (def year-parser (memoize (fn  [cur]
                            (str (* 2024 (parse-long cur))))))
 
+(defn updater [c]
+  (cond 
+    (nil? c) 1
+    :else (inc c)))
+
+(defn update-pair [m e]
+     (update m e updater))
 
 (def blicky (fn [acc cur]
       (cond 
-        (= "0" cur) (conj! acc "1")
-        (= "1" cur) (conj! acc "2024")
-        (even? (count cur))  (let [v (split-number cur)
-                                   #_ (println (get v 0) (trim-leading-zeros (get v 1))) ]
-                               (conj! (conj! acc (get v 0)) (get v 1)))
-        :else (conj! acc (year-parser cur)))))
+        (= "0" cur) (-> (update acc "1" updater)
+                        (update cur  (fn [v] (if (nil? v) 0 (dec v))  ))) 
+        (even? (count cur))  (let [v (split-number cur) ]
+                               (-> (reduce update-pair acc v)
+                                   (update cur (fn [v] (if (nil? v)  0 (dec v))  ))
+                                   ))
+        :else (-> (update acc (year-parser cur) updater)
+                  
+                  (update cur (fn [v] (if (nil? v)  0 (dec v))  ))) 
+        
+        )))
+
+(let [n 5
+      input (generator sample-data) ] 
+  (loop [cnt 0
+         result (reduce blicky {} input) ] 
+      (if (= cnt n)
+        (vals result)
+        (let [new-map  (into {}  (->> (filter (comp pos? second) result))) 
+              _ (println new-map) ] 
+          (recur (inc cnt) (reduce blicky {} (->> (mapcat (fn [[k v]] (repeat v k))  new-map))))))))
 
 (defn light-years [n input] 
+
   (loop [cnt 0
          result input ] 
       (println cnt)
